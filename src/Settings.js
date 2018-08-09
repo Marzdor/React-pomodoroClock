@@ -1,16 +1,16 @@
 import React from "react";
 
-const Controls = props => {
+const Settings = props => {
   return (
     <section>
-      <div id="break-label">
-        <h2>Break Length</h2>
+      <div>
+        <h2 id="break-label">Break Length</h2>
         <button id="break-decrement">-</button>
         <h3 id="break-length">5</h3>
         <button id="break-increment">+</button>
       </div>
-      <div id="session-label">
-        <h2>Session Length</h2>
+      <div>
+        <h2 id="session-label">Session Length</h2>
         <button id="session-decrement">-</button>
         <h3 id="session-length">25</h3>
         <button id="session-increment">+</button>
@@ -19,4 +19,4 @@ const Controls = props => {
   );
 };
 
-export default Controls;
+export default Settings;
