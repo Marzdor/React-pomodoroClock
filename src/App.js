@@ -84,33 +84,33 @@ class App extends Component {
           newTime = this.state.breakTime + 1;
           this.setState({
             breakTime: newTime,
-            seconds: newTime * 60,
-            time: this.secondsToTime(newTime * 60)
+            seconds: newTime * 60
           });
         } else if (btn.innerHTML === "-" && this.state.breakTime > 1) {
           newTime = this.state.breakTime - 1;
           this.setState({
             breakTime: newTime,
-            seconds: newTime * 60,
-            time: this.secondsToTime(newTime * 60)
+            seconds: newTime * 60
           });
         }
+        if (this.state.currentTimer === "Break")
+          this.setState({ time: this.secondsToTime(newTime * 60) });
       } else {
         if (btn.innerHTML === "+" && this.state.sessionTime < 60) {
           newTime = this.state.sessionTime + 1;
           this.setState({
             sessionTime: newTime,
-            seconds: newTime * 60,
-            time: this.secondsToTime(newTime * 60)
+            seconds: newTime * 60
           });
         } else if (btn.innerHTML === "-" && this.state.sessionTime > 1) {
           newTime = this.state.sessionTime - 1;
           this.setState({
             sessionTime: newTime,
-            seconds: newTime * 60,
-            time: this.secondsToTime(newTime * 60)
+            seconds: newTime * 60
           });
         }
+        if (this.state.currentTimer === "Session")
+          this.setState({ time: this.secondsToTime(newTime * 60) });
       }
     }
   }
