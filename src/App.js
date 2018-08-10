@@ -69,17 +69,39 @@ class App extends Component {
     const btn = e.target;
 
     if (this.state.timerState === "off") {
+      let newTime;
+
       if (/break/.test(btn.id)) {
         if (btn.innerHTML === "+" && this.state.breakTime < 60) {
-          this.setState({ breakTime: this.state.breakTime + 1 });
+          newTime = this.state.breakTime + 1;
+          this.setState({
+            breakTime: newTime,
+            seconds: newTime * 60,
+            time: this.secondsToTime(newTime * 60)
+          });
         } else if (btn.innerHTML === "-" && this.state.breakTime > 1) {
-          this.setState({ breakTime: this.state.breakTime - 1 });
+          newTime = this.state.breakTime - 1;
+          this.setState({
+            breakTime: newTime,
+            seconds: newTime * 60,
+            time: this.secondsToTime(newTime * 60)
+          });
         }
       } else {
         if (btn.innerHTML === "+" && this.state.sessionTime < 60) {
-          this.setState({ sessionTime: this.state.sessionTime + 1 });
+          newTime = this.state.sessionTime + 1;
+          this.setState({
+            sessionTime: newTime,
+            seconds: newTime * 60,
+            time: this.secondsToTime(newTime * 60)
+          });
         } else if (btn.innerHTML === "-" && this.state.sessionTime > 1) {
-          this.setState({ sessionTime: this.state.sessionTime - 1 });
+          newTime = this.state.sessionTime - 1;
+          this.setState({
+            sessionTime: newTime,
+            seconds: newTime * 60,
+            time: this.secondsToTime(newTime * 60)
+          });
         }
       }
     }
