@@ -31,8 +31,12 @@ class App extends Component {
     let divisor_for_seconds = divisor_for_minutes % 60;
     let seconds = Math.ceil(divisor_for_seconds);
 
-    if (this.state.seconds >= 3540) minutes = 60;
-    if (minutes === 60) seconds = 0;
+    if (this.state.seconds === 3600) {
+      seconds = 0;
+      minutes = 60;
+    }
+    if (this.state.seconds >= 3540 && this.state.seconds < 3600) minutes = 59;
+
     console.log(seconds);
 
     if (isNaN(minutes)) minutes = 1;
