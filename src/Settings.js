@@ -8,7 +8,7 @@ const Settings = props => {
         <button onClick={props.handleSettingsClick} id="break-decrement">
           -
         </button>
-        <h3 id="break-length">5</h3>
+        <h3 id="break-length">{props.breakTime}</h3>
         <button onClick={props.handleSettingsClick} id="break-increment">
           +
         </button>
@@ -18,7 +18,7 @@ const Settings = props => {
         <button onClick={props.handleSettingsClick} id="session-decrement">
           -
         </button>
-        <h3 id="session-length">25</h3>
+        <h3 id="session-length">{props.sessionTime}</h3>
         <button onClick={props.handleSettingsClick} id="session-increment">
           +
         </button>
