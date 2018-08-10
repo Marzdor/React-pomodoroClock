@@ -34,6 +34,9 @@ class App extends Component {
     if (seconds < 10) seconds = ("0" + seconds).slice(-2);
     if (minutes < 10) minutes = ("0" + minutes).slice(-2);
 
+    if (isNaN(minutes)) minutes = 1;
+    if (isNaN(seconds)) seconds = 1;
+
     let obj = {
       m: minutes,
       s: seconds
