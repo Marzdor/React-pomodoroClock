@@ -18,22 +18,33 @@ class App extends Component {
 
   handleSettingsClick(e) {
     const btn = e.target;
-    if (/break/.test(btn.id)) {
-      console.log(btn.innerHTML);
-      btn.innerHTML === "+"
-        ? this.setState({ breakTime: this.state.breakTime + 1 })
-        : this.setState({ breakTime: this.state.breakTime - 1 });
-    } else {
-      btn.innerHTML === "+"
-        ? this.setState({ sessionTime: this.state.sessionTime + 1 })
-        : this.setState({ sessionTime: this.state.sessionTime - 1 });
+
+    if (!this.state.timerRunning) {
+      if (/break/.test(btn.id)) {
+        console.log(btn.innerHTML);
+        btn.innerHTML === "+"
+          ? this.setState({ breakTime: this.state.breakTime + 1 })
+          : this.setState({ breakTime: this.state.breakTime - 1 });
+        if (this.state.currentTimer === "Break")
+          this.setState({ currentTime: this.state.breakTime });
+      } else {
+        btn.innerHTML === "+"
+          ? this.setState({ sessionTime: this.state.sessionTime + 1 })
+          : this.setState({ sessionTime: this.state.sessionTime - 1 });
+        if (this.state.currentTimer === "Session")
+          this.setState({ currentTime: this.state.sessionTime });
+      }
     }
   }
 
   render() {
     return (
       <div id="App">
-        <Settings handleSettingsClick={this.handleSettingsClick} />
+        <Settings
+          handleSettingsClick={this.handleSettingsClick}
+          breakTime={this.state.breakTime}
+          sessionTime={this.state.sessionTime}
+        />
         <Timer
           timerText={this.state.currentTime}
           currentTimer={this.state.currentTimer}
