@@ -8,7 +8,9 @@ const Timer = props => {
       <button id="start_stop" onClick={props.handleStartStopClick}>
         ►❚❚
       </button>
-      <button id="reset">⟳</button>
+      <button id="reset" onClick={props.handleResetClick}>
+        ⟳
+      </button>
     </section>
   );
 };

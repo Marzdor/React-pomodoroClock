@@ -17,6 +17,7 @@ class App extends Component {
     };
     this.handleSettingsClick = this.handleSettingsClick.bind(this);
     this.handleStartStopClick = this.handleStartStopClick.bind(this);
+    this.handleResetClick = this.handleResetClick.bind(this);
 
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
@@ -132,6 +133,21 @@ class App extends Component {
     // }
   }
 
+  handleResetClick(e) {
+    if (this.state.timerState === "on") {
+      clearInterval(this.timer);
+    }
+    let restTime = this.secondsToTime(25 * 60);
+    this.setState({
+      sessionTime: 25,
+      breakTime: 5,
+      timerState: "off",
+      currentTimer: "Session",
+      time: restTime,
+      seconds: 1500
+    });
+  }
+
   render() {
     return (
       <div id="App">
@@ -146,6 +162,7 @@ class App extends Component {
           currentTimer={this.state.currentTimer}
           timerState={this.state.timerState}
           handleStartStopClick={this.handleStartStopClick}
+          handleResetClick={this.handleResetClick}
         />
       </div>
     );
