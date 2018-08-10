@@ -61,6 +61,15 @@ class App extends Component {
     // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
+      if (this.state.currentTimer === "Session") {
+        let sec = this.state.breakTime * 60;
+        this.setState({ currentTimer: "Break", seconds: sec });
+        this.startTimer();
+      } else if (this.state.currentTimer === "Break") {
+        let sec = this.state.sessionTime * 60;
+        this.setState({ currentTimer: "Session", seconds: sec });
+        this.startTimer();
+      }
     }
   }
 
@@ -123,14 +132,6 @@ class App extends Component {
       default:
         console.log(this.state.timerState);
     }
-
-    // if (this.state.currentTimer === "Session") {
-    //   let sec = this.state.sessionTime * 60;
-    //   this.setState({ seconds: sec });
-    // } else if (this.state.currentTimer === "Break") {
-    //   let sec = this.state.sessionTime * 60;
-    //   this.setState({ seconds: sec });
-    // }
   }
 
   handleResetClick(e) {
