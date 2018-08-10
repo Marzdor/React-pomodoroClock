@@ -41,10 +41,10 @@ class App extends Component {
         minutes = 60;
       }
       if (secs >= 3540 && secs < 3600) minutes = 59;
-
-      if (isNaN(minutes)) minutes = 1;
-      if (isNaN(seconds)) seconds = 1;
     }
+
+    if (isNaN(minutes)) minutes = 1;
+    if (isNaN(seconds)) seconds = 0;
 
     if (seconds < 10) seconds = ("0" + seconds).slice(-2);
     if (minutes < 10) minutes = ("0" + minutes).slice(-2);
