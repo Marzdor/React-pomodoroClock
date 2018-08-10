@@ -70,18 +70,17 @@ class App extends Component {
 
     if (this.state.timerState === "off") {
       if (/break/.test(btn.id)) {
-        console.log(btn.innerHTML);
-        btn.innerHTML === "+"
-          ? this.setState({ breakTime: this.state.breakTime + 1 })
-          : this.setState({ breakTime: this.state.breakTime - 1 });
-        if (this.state.currentTimer === "Break")
-          this.setState({ currentTime: this.state.breakTime });
+        if (btn.innerHTML === "+" && this.state.breakTime < 60) {
+          this.setState({ breakTime: this.state.breakTime + 1 });
+        } else if (btn.innerHTML === "-" && this.state.breakTime > 1) {
+          this.setState({ breakTime: this.state.breakTime - 1 });
+        }
       } else {
-        btn.innerHTML === "+"
-          ? this.setState({ sessionTime: this.state.sessionTime + 1 })
-          : this.setState({ sessionTime: this.state.sessionTime - 1 });
-        if (this.state.currentTimer === "Session")
-          this.setState({ currentTime: this.state.sessionTime });
+        if (btn.innerHTML === "+" && this.state.sessionTime < 60) {
+          this.setState({ sessionTime: this.state.sessionTime + 1 });
+        } else if (btn.innerHTML === "-" && this.state.sessionTime > 1) {
+          this.setState({ sessionTime: this.state.sessionTime - 1 });
+        }
       }
     }
   }
