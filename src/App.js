@@ -31,11 +31,15 @@ class App extends Component {
     let divisor_for_seconds = divisor_for_minutes % 60;
     let seconds = Math.ceil(divisor_for_seconds);
 
-    if (seconds < 10) seconds = ("0" + seconds).slice(-2);
-    if (minutes < 10) minutes = ("0" + minutes).slice(-2);
+    if (this.state.seconds >= 3540) minutes = 60;
+    if (minutes === 60) seconds = 0;
+    console.log(seconds);
 
     if (isNaN(minutes)) minutes = 1;
     if (isNaN(seconds)) seconds = 1;
+
+    if (seconds < 10) seconds = ("0" + seconds).slice(-2);
+    if (minutes < 10) minutes = ("0" + minutes).slice(-2);
 
     let obj = {
       m: minutes,
