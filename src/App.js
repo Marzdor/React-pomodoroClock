@@ -46,9 +46,7 @@ class App extends Component {
   }
 
   startTimer() {
-    if (this.timer === 0) {
-      this.timer = setInterval(this.countDown, 1000);
-    }
+    this.timer = setInterval(this.countDown, 1000);
   }
 
   countDown() {
@@ -108,15 +106,30 @@ class App extends Component {
   }
 
   handleStartStopClick(e) {
-    if (this.state.currentTimer === "Session") {
-      let sec = this.state.sessionTime * 60;
-      this.setState({ seconds: sec });
-    } else if (this.state.currentTimer === "Break") {
-      let sec = this.state.sessionTime * 60;
-      this.setState({ seconds: sec });
+    switch (this.state.timerState) {
+      case "off":
+        this.setState({ timerState: "on" });
+        this.startTimer();
+        break;
+      case "on":
+        clearInterval(this.timer);
+        this.setState({ timerState: "paused" });
+        break;
+      case "paused":
+        this.setState({ timerState: "on" });
+        this.startTimer();
+        break;
+      default:
+        console.log(this.state.timerState);
     }
 
-    this.startTimer();
+    // if (this.state.currentTimer === "Session") {
+    //   let sec = this.state.sessionTime * 60;
+    //   this.setState({ seconds: sec });
+    // } else if (this.state.currentTimer === "Break") {
+    //   let sec = this.state.sessionTime * 60;
+    //   this.setState({ seconds: sec });
+    // }
   }
 
   render() {
