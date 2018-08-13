@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import Settings from "./Settings";
 import Timer from "./Timer";
-
+import Beep from "./assests/sounds/beep.mp3";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -76,13 +75,22 @@ class App extends Component {
     // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
+      document.querySelector("#beep").play();
       if (this.state.currentTimer === "Session") {
         let sec = this.state.breakTime * 60;
-        this.setState({ currentTimer: "Break", seconds: sec });
+        this.setState({
+          currentTimer: "Break",
+          seconds: sec,
+          time: this.secondsToTime(sec)
+        });
         this.startTimer();
       } else if (this.state.currentTimer === "Break") {
         let sec = this.state.sessionTime * 60;
-        this.setState({ currentTimer: "Session", seconds: sec });
+        this.setState({
+          currentTimer: "Session",
+          seconds: sec,
+          time: this.secondsToTime(sec)
+        });
         this.startTimer();
       }
     }
@@ -153,6 +161,8 @@ class App extends Component {
     if (this.state.timerState === "on") {
       clearInterval(this.timer);
     }
+    document.querySelector("#beep").pause();
+    document.querySelector("#beep").currentTime = 0;
     let restTime = this.secondsToTime(25 * 60);
     this.setState({
       sessionTime: 25,
@@ -167,6 +177,7 @@ class App extends Component {
   render() {
     return (
       <div id="App">
+        <audio id="beep" src={Beep} />
         <Settings
           handleSettingsClick={this.handleSettingsClick}
           breakTime={this.state.breakTime}
