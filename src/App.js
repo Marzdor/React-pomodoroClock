@@ -29,7 +29,6 @@ class App extends Component {
 
     let divisor_for_seconds = divisor_for_minutes % 60;
     let seconds = Math.ceil(divisor_for_seconds);
-    console.log(secs);
 
     if (this.state.seconds === 3600 && isNaN(secs)) {
       seconds = 0;
@@ -101,15 +100,15 @@ class App extends Component {
 
     if (this.state.timerState === "off") {
       let newTime;
-
+      console.log(btn);
       if (/break/.test(btn.id)) {
-        if (btn.innerHTML === "+" && this.state.breakTime < 60) {
+        if (btn.innerHTML === "🡅" && this.state.breakTime < 60) {
           newTime = this.state.breakTime + 1;
           this.setState({
             breakTime: newTime,
             seconds: newTime * 60
           });
-        } else if (btn.innerHTML === "-" && this.state.breakTime > 1) {
+        } else if (btn.innerHTML === "🡇" && this.state.breakTime > 1) {
           newTime = this.state.breakTime - 1;
           this.setState({
             breakTime: newTime,
@@ -119,13 +118,13 @@ class App extends Component {
         if (this.state.currentTimer === "Break")
           this.setState({ time: this.secondsToTime(newTime * 60) });
       } else {
-        if (btn.innerHTML === "+" && this.state.sessionTime < 60) {
+        if (btn.innerHTML === "🡅" && this.state.sessionTime < 60) {
           newTime = this.state.sessionTime + 1;
           this.setState({
             sessionTime: newTime,
             seconds: newTime * 60
           });
-        } else if (btn.innerHTML === "-" && this.state.sessionTime > 1) {
+        } else if (btn.innerHTML === "🡇" && this.state.sessionTime > 1) {
           newTime = this.state.sessionTime - 1;
           this.setState({
             sessionTime: newTime,
@@ -178,6 +177,7 @@ class App extends Component {
     return (
       <div id="App">
         <audio id="beep" src={Beep} />
+        <h1 id="title">Pomodoro Clock</h1>
         <Settings
           handleSettingsClick={this.handleSettingsClick}
           breakTime={this.state.breakTime}
