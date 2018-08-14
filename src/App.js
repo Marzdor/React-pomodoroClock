@@ -65,33 +65,39 @@ class App extends Component {
 
   countDown() {
     // Remove one second, set state so a re-render happens.
-    let seconds = this.state.seconds - 1;
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds
-    });
 
     // Check if we're at zero.
-    if (seconds === 0) {
+    if (this.state.seconds === 0) {
       clearInterval(this.timer);
       document.querySelector("#beep").play();
-      if (this.state.currentTimer === "Session") {
-        let sec = this.state.breakTime * 60;
-        this.setState({
-          currentTimer: "Break",
-          seconds: sec,
-          time: this.secondsToTime(sec)
-        });
-        this.startTimer();
-      } else if (this.state.currentTimer === "Break") {
-        let sec = this.state.sessionTime * 60;
-        this.setState({
-          currentTimer: "Session",
-          seconds: sec,
-          time: this.secondsToTime(sec)
-        });
-        this.startTimer();
+      let sec;
+      switch (this.state.currentTimer) {
+        case "Session":
+          sec = this.state.breakTime * 60;
+          this.setState({
+            currentTimer: "Break",
+            seconds: sec,
+            time: this.secondsToTime(sec)
+          });
+          break;
+        case "Break":
+          sec = this.state.sessionTime * 60;
+          this.setState({
+            currentTimer: "Session",
+            seconds: sec,
+            time: this.secondsToTime(sec)
+          });
+          break;
+        default:
+          console.log(this.state.currentTimer);
       }
+      this.startTimer();
+    } else {
+      let seconds = this.state.seconds - 1;
+      this.setState({
+        time: this.secondsToTime(seconds),
+        seconds: seconds
+      });
     }
   }
 
@@ -100,7 +106,7 @@ class App extends Component {
 
     if (this.state.timerState === "off") {
       let newTime;
-      console.log(btn);
+
       if (/break/.test(btn.id)) {
         if (btn.innerHTML === "🡅" && this.state.breakTime < 60) {
           newTime = this.state.breakTime + 1;
